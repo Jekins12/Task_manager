@@ -5,8 +5,8 @@ class TaskList:
         self.name = name
         self.tasks: list[Task] = []
 
-    def add_task(self, description: str, hide_after_minutes: int = 60):
-        self.tasks.append(Task(description, hide_after_minutes=hide_after_minutes))
+    def add_task(self, description: str, hide_after_minutes: int = 60, deadline: str = None):
+        self.tasks.append(Task(description, hide_after_minutes=hide_after_minutes, deadline=deadline))
 
     def get_visible_tasks(self):
         for task in self.tasks:
@@ -32,7 +32,7 @@ class TaskList:
             return True
         return False
 
-    def edit_task_by_index(self, index, new_description=None, new_minutes=None):
+    def edit_task_by_index(self, index, new_description=None, new_minutes=None, new_deadline=None):
         visible = self.get_visible_tasks()
         if 0 <= index - 1 < len(visible):
             task = visible[index - 1]
@@ -40,6 +40,8 @@ class TaskList:
                 task.description = new_description
             if new_minutes:
                 task.hide_after_minutes = new_minutes
+            if new_deadline:
+                task.deadline = new_deadline
             return True
         return False
 
