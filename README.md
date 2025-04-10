@@ -7,9 +7,13 @@ Prosty, dynamiczny menedżer zadań działający w konsoli. Obsługuje wiele lis
 - Dodawanie i przeglądanie zadań
 - Obsługa wielu list zadań
 - Ukrywanie zadań po określonym czasie (domyślnie 60 minut)
+- Deadline z ostrzeżeniami:
+  - ⏰ zbliża się termin (do 1h)
+  - ⛔️ termin minął
+- Wsparcie dla deadline względnego (`-30` = 30 minut przed końcem)
+- Edytowanie i usuwanie zadań
 - Dynamiczne numerowanie zadań (1, 2, 3, ...)
-- Oznaczanie zadań jako zrealizowane
-- Zapisywanie i wczytywanie zadań z pliku `tasks.json`
+- Zapis i odczyt danych z pliku `tasks.json`
 
 ## ▶️ Uruchomienie
 
@@ -25,23 +29,27 @@ python main.py
 > create dom
 Utworzono i przełączono na listę: dom
 
-> add Posprzątać pokój 30
-Dodano zadanie.
-
-> add Zrobić zakupy
+> add Zrobić pranie 30 -10
 Dodano zadanie.
 
 > show
 -- Lista zadań: dom --
-1: [ ] Posprzątać pokój (dodano: 13:40)
-2: [ ] Zrobić zakupy (dodano: 13:41)
+1: [ ] ⏰ Zrobić pranie | deadline: 2025-04-11T13:25 (dodano: 13:05)
 
 > done 1
 Oznaczono jako zrealizowane.
 
-> hidden
-Brak ukrytych zadań.
+> delete 1
+Zadanie usunięte.
 ```
+
+## ✏️ Edytowanie
+
+```bash
+edit 1 Nowy opis|45|-15
+```
+
+- Zmienia opis, czas ukrycia i deadline na 30 minut przed końcem
 
 ## 📂 Struktura projektu
 
@@ -51,7 +59,8 @@ Brak ukrytych zadań.
 ├── task.py              # Klasa pojedynczego zadania
 ├── task_list.py         # Klasa listy zadań
 ├── task_manager.py      # Główna logika aplikacji
-└── tasks.json           # Zapisane dane (tworzy się automatycznie)
+├── tasks.json           # Zapisane dane (tworzy się automatycznie)
+└── README.md            # Instrukcja użycia
 ```
 
 ## 📄 Licencja
