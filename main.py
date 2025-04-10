@@ -3,17 +3,17 @@ from task_manager import TaskManager
 def show_help():
     print("""
 Dostępne komendy:
-  create [nazwa]              - utwórz nową listę zadań i przełącz się na nią
-  switch [nazwa]              - przełącz się na istniejącą listę
-  lists                       - wyświetl dostępne listy zadań
-  add [opis] [minuty] [dl]    - dodaj zadanie (opcjonalnie: minuty ukrycia, deadline ISO)
-  show                        - pokaż widoczne zadania
-  hidden                      - pokaż ukryte zadania
-  done [numer]                - oznacz zadanie jako zrealizowane
-  delete [numer]              - usuń zadanie
-  edit [numer] [opis]|[czas]|[deadline] - edytuj zadanie
-  help                        - pokaż pomoc
-  exit                        - zakończ program
+  create [nazwa]                - utwórz nową listę zadań i przełącz się na nią
+  switch [nazwa]                - przełącz się na istniejącą listę
+  lists                         - wyświetl dostępne listy zadań
+  add [opis] [minuty] [-x/ISO]  - dodaj zadanie (czas ukrycia, deadline ISO lub np. -30)
+  show                          - pokaż widoczne zadania
+  hidden                        - pokaż ukryte zadania
+  done [numer]                  - oznacz zadanie jako zrealizowane
+  delete [numer]                - usuń zadanie
+  edit [numer] opis|czas|dl     - edytuj zadanie
+  help                          - pokaż pomoc
+  exit                          - zakończ program
 """)
 
 def main():
@@ -90,7 +90,7 @@ def main():
                 else:
                     print("Nie znaleziono zadania.")
             except:
-                print("Błąd edycji. Użycie: edit [numer] [opis]|[czas]|[deadline]")
+                print("Błąd edycji. Użycie: edit [numer] opis|czas|deadline")
         elif cmd == "help":
             show_help()
         elif cmd == "exit":

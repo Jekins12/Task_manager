@@ -1,4 +1,5 @@
 from task import Task
+import datetime
 
 class TaskList:
     def __init__(self, name: str):
@@ -6,7 +7,17 @@ class TaskList:
         self.tasks: list[Task] = []
 
     def add_task(self, description: str, hide_after_minutes: int = 60, deadline: str = None):
-        self.tasks.append(Task(description, hide_after_minutes=hide_after_minutes, deadline=deadline))
+        final_deadline = None
+        if deadline:
+            if deadline.startswith("-"):
+                try:
+                    offset = int(deadline[1:])
+                    final_deadline = (datetime.datetime.now() + datetime.timedelta(minutes=hide_after_minutes - offset)).isoformat()
+                except:
+                    final_deadline = None
+            else:
+                final_deadline = deadline
+        self.tasks.append(Task(description, hide_after_minutes=hide_after_minutes, deadline=final_deadline))
 
     def get_visible_tasks(self):
         for task in self.tasks:
@@ -41,7 +52,14 @@ class TaskList:
             if new_minutes:
                 task.hide_after_minutes = new_minutes
             if new_deadline:
-                task.deadline = new_deadline
+                if new_deadline.startswith("-"):
+                    try:
+                        offset = int(new_deadline[1:])
+                        task.deadline = (datetime.datetime.now() + datetime.timedelta(minutes=task.hide_after_minutes - offset)).isoformat()
+                    except:
+                        pass
+                else:
+                    task.deadline = new_deadline
             return True
         return False
 
