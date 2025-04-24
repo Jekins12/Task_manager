@@ -19,6 +19,7 @@ Dostępne komendy:
 def main():
     manager = TaskManager()
     print("== Menedżer Zadań ==")
+    print("Wpisz 'help' żeby wyświetlić listę dostępnych komend")
     while True:
         cmd = input("\n> ").strip()
         if cmd.startswith("create "):
